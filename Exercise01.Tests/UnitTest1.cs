@@ -32,7 +32,7 @@ namespace Exercise01.Tests
         public void Year_1700_Is_LeapYear()
         {
             var isLeapYear = Program.IsLeapYear(1700);
-            Assert.True(isLeapYear);
+            Assert.False(isLeapYear);
         }
 
         [Fact]
