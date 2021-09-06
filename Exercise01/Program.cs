@@ -7,7 +7,7 @@ namespace Exercise01
         public static void Main(string[] args)
         {
             PrintPrompt();
-            LeapYearUserInput();
+            UserInput();
         }
 
         public static void Hello_World(string[] args)
@@ -24,13 +24,18 @@ namespace Exercise01
             } else return false;
         }
 
-        public static void LeapYearUserInput()
+        public static void UserInput()
         {
             string input = Console.ReadLine();
-            int parse = Int32.Parse(input);
-            if (IsLeapYear(parse)) {
-                Console.WriteLine("yay");
-            } else Console.WriteLine("nope");
+            int parse;
+            bool success = Int32.TryParse(input, out parse);
+            if (success) {
+                if (parse >= 1582) {
+                    if (IsLeapYear(parse)) {
+                        Console.WriteLine("yay");
+                } else Console.WriteLine("nope");
+            } else Console.WriteLine("Leap year function only applies to years from 1582 and up");
+            } else Console.WriteLine("Year not recognized, please provide valid year");
         }
 
         public static void PrintPrompt()

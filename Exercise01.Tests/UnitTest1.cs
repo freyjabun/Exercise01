@@ -62,7 +62,7 @@ namespace Exercise01.Tests
         }
 
         [Fact]
-        public void LeapYearUserInput_Reads_Input()
+        public void UserInput_Reads_Input()
         {
             var writer = new StringWriter();
             Console.SetOut(writer);
@@ -70,10 +70,40 @@ namespace Exercise01.Tests
             var input = new StringReader("2000");
             Console.SetIn(input);
 
-            Program.LeapYearUserInput();
+            Program.UserInput();
 
             var output = writer.GetStringBuilder().ToString().Trim();
             Assert.Equal("yay",output);
+        }
+
+        [Fact]
+        public void UserInput_Handles_Unparsable_Input()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var input = new StringReader("not a year");
+            Console.SetIn(input);
+
+            Program.UserInput();
+
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("Year not recognized, please provide valid year",output);
+        }
+
+        [Fact]
+        public void UserInput_Handles_Input_Below_1582()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var input = new StringReader("1581");
+            Console.SetIn(input);
+
+            Program.UserInput();
+
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("Leap year function only applies to years from 1582 and up",output);
         }
     }
 }
