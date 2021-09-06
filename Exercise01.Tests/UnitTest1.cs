@@ -7,14 +7,14 @@ namespace Exercise01.Tests
     public class UnitTest1
     {
         [Fact]
-        public void Main_Prints_Hello_World()
+        public void Hello_World_Prints_Hello_World()
         {
             //Assign
             var writer = new StringWriter();
             Console.SetOut(writer);
 
             //Act
-            Program.Main(new string[0]);
+            Program.Hello_World(new string[0]);
 
             //Assert
             var output = writer.GetStringBuilder().ToString().Trim();
@@ -49,5 +49,31 @@ namespace Exercise01.Tests
             Assert.True(isLeapYear);
         }
 
+        [Fact]
+        public void PrintPrompt_Prints_Prompt()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Program.PrintPrompt();
+
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("Enter Year",output);
+        }
+
+        [Fact]
+        public void LeapYearUserInput_Reads_Input()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var input = new StringReader("2000");
+            Console.SetIn(input);
+
+            Program.LeapYearUserInput();
+
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("yay",output);
+        }
     }
 }
